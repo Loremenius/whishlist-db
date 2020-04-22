@@ -1,12 +1,12 @@
 const express = require('express');
 const helmet = require('helmet');
 
-const routeOne = require('./routeOne/route_one-router');
+const user = require('./user/user-router');
 
 const server = express();
 
 server.use(express.json());
 server.use(helmet());
-server.use("/api/routeOne", routeOne);
+server.use("/api/user", user);
 
 module.exports = server;
