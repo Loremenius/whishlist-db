@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const userDb = require('./user-model')
 const validateLogin = require('../middleware/ValidateLogin');
+const ValidateRegister = require('../middleware/ValidateRegister')
 
 router.post('/login', validateLogin, (req, res)=>{
     req.body.username = req.body.username.toLowerCase();
@@ -16,6 +17,8 @@ router.post('/login', validateLogin, (req, res)=>{
                     message:`Welcome ${data.username}`,
                     user:{
                         username:data.username,
+                        firstname:data.firstname,
+                        lastname:data.lastname,
                         user_id:data.id
                     },
                     token:token
@@ -33,7 +36,7 @@ router.post('/login', validateLogin, (req, res)=>{
         })
 })
 
-router.post('/register', (req,res)=>{
+router.post('/register', ValidateRegister, (req,res)=>{
     req.body.username = req.body.username.toLowerCase();
     req.body.password = bcrypt.hashSync(req.body.password,8);
     userDb.createUser(req.body)
@@ -51,6 +54,8 @@ router.post('/register', (req,res)=>{
             });
         })
 });
+
+
 
 function signToken(user) {
     const payload = {
