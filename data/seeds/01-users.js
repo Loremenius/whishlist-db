@@ -1,6 +1,6 @@
 exports.seed = function(knex) {
     // Deletes ALL existing entries
-    return knex('chefs').del()
+    return knex('user').del()
       .then(function () {
         // Inserts seed entries
         return knex('user').insert([
@@ -125,12 +125,6 @@ exports.seed = function(knex) {
                 "lastname": "Casias"
             },
             {
-                "username": "dlcasias",
-                "password": "$2a$08$t2nwc7Tp1jBquCM6xyjn3uWJJh6P3JmYnPMqRPCJG1Pu0KkIx/HbK",
-                "firstname": "Alex",
-                "lastname": "Casias"
-            },
-            {
                 "username": "wil",
                 "password": "$2a$08$QgIvZ7nJbbuuh93H6P4tpuuBkHFGPjQwEEik77KgA2j.jyC3mLUCi",
                 "firstname": "Wil",
@@ -146,6 +140,48 @@ exports.seed = function(knex) {
                 "username": "lcasias",
                 "password": "$2a$08$/0ubMNoqHF.0rjryanrIPukJFUs4UJs5mE2VwE2arzYSxgVB/mj9K",
                 "firstname": "Lilia",
+                "lastname": "Casias"
+            },
+            {
+                "username": "dcasias",
+                "password": "$2a$08$vQQv2eFCzY0/tbywP2kDmOe4RzvlsdFwYkhX.CjesDnMgEYu20f5i",
+                "firstname": "David",
+                "lastname": "Casias"
+            },
+            {
+                "username": "nathalie",
+                "password": "$2a$08$yPxCf.wiX21Cq3jPbUP96.I7aWPsFlpIttLCZZvn8hYGrhMPaj2PS",
+                "firstname": "Nathalie",
+                "lastname": "Agnew"
+            },
+            {
+                "username": "timothy",
+                "password": "$2a$08$N3LrWhJX8mJYIEKVwMu0I.mb6d2wlXFqjQsyUS6l.wCNzfLEh/KCe",
+                "firstname": "Timothy",
+                "lastname": "Agnew"
+            },
+            {
+                "username": "megan",
+                "password": "$2a$08$UMTpPYkdgSUVtUp2nuQGseQG0hu9v1zpb4knedVV6gxFZjzAcaLcm",
+                "firstname": "Megan",
+                "lastname": "Agnew"
+            },
+            {
+                "username": "j2",
+                "password": "$2a$08$HgCURV6qSIzog2ysrWavLOFXyIueJcShBV250TEMUId2UT.FGnjZG",
+                "firstname": "John",
+                "lastname": "Agnew"
+            },
+            {
+                "username": "brent",
+                "password": "$2a$08$TX3LAfhjiRlN8kAQoksCKugjO1szsAI8Tp25wnnaxExuRkx1TQPdK",
+                "firstname": "Brent",
+                "lastname": "Agnew"
+            },
+            {
+                "username": "rodolpho",
+                "password": "$2a$08$5DkTKgZ8oImdHOtLJlK19eiee1Jnl1UC38ca/LxP0mdYtdFRalH4m",
+                "firstname": "Rodolpho",
                 "lastname": "Casias"
             }
         ]);

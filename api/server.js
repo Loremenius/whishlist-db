@@ -11,6 +11,6 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use("/api/user", user);
-server.user('/api/user/wishlist',ValidateToken, gift)
+server.use('/api/user/wishlist',ValidateToken, gift)
 
 module.exports = server;
