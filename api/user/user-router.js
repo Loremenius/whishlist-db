@@ -55,6 +55,48 @@ router.post('/register', ValidateRegister, (req,res)=>{
         })
 });
 
+router.get('/families', (req,res)=>{
+    userDb.getUsers()
+        .then(data=>{
+            const visited = {};
+            const families = [];
+            data.forEach((user)=>{
+                if(user.lastname in visited === false){
+                    families.push(user.lastname)
+                    visited[user.lastname] = true;
+                }
+            })
+            res.status(200).json(families)
+        })
+        .catch(error=>{
+            console.log(error);
+            res.status(500).json({
+                error:error,
+                errorMessage:'Error getting list of users'
+            })
+        })
+});
+
+router.get('/families/:name', (req,res)=>{
+    userDb.getFamilyUsers(req.params.name)
+        .then(data=>{
+            if (data.length === 0){
+                res.status(404).json({
+                    message:`No users with lastname: ${req.params.name}`
+                });
+            }else{
+                res.status(200).json(data)
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+            res.status(500).json({
+                error:error,
+                errorMessage:'Error getting list of users'
+            })
+        })
+});
+
 
 
 function signToken(user) {

@@ -9,7 +9,9 @@ module.exports = {
     addGift,
     updateGift,
     deleteGift,
-    markPurchased
+    markPurchased,
+    getUsers,
+    getFamilyUsers
 };
 
 function findByName(username){
@@ -49,4 +51,12 @@ function deleteGift(gift_id){
 
 function markPurchased(gift_id){
     return db('gift').update({purchased:true}).where('id', gift_id)
+}
+
+function getUsers(){
+    return db('user').select('id', 'firstname', 'lastname')
+}
+
+function getFamilyUsers(lastname){
+    return db('user').select('id', 'firstname', 'lastname').where('lastname', lastname)
 }
