@@ -58,12 +58,15 @@ router.post('/register', ValidateRegister, (req,res)=>{
 router.get('/families', (req,res)=>{
     userDb.getUsers()
         .then(data=>{
-            const visited = {};
-            const families = [];
+            const families = {};
             data.forEach((user)=>{
-                if(user.lastname in visited === false){
-                    families.push(user.lastname)
-                    visited[user.lastname] = true;
+                if(user.lastname in families === false){
+                    families[user.lastname] = {
+                        name:user.lastname,
+                        members:[ user ]
+                    }
+                }else{
+                    families[user.lastname].members = [ ...families[user.lastname].members,user ] 
                 }
             })
             res.status(200).json(families)
