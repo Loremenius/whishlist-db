@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken')
 
 const userDb = require('./user-model')
 const validateLogin = require('../middleware/ValidateLogin');
-const ValidateRegister = require('../middleware/ValidateRegister')
+const ValidateRegister = require('../middleware/ValidateRegister');
+const FindUserByUsername = require('../middleware/FindUserByUsername');
 
 router.post('/login', validateLogin, (req, res)=>{
     req.body.username = req.body.username.toLowerCase();
@@ -36,12 +37,11 @@ router.post('/login', validateLogin, (req, res)=>{
         })
 })
 
-router.post('/register', ValidateRegister, (req,res)=>{
+router.post('/register', ValidateRegister, FindUserByUsername, (req,res)=>{
     req.body.username = req.body.username.toLowerCase();
     req.body.password = bcrypt.hashSync(req.body.password,8);
     userDb.createUser(req.body)
         .then(data=>{
-            console.log("insert success",data)
             if(data){
                 res.status(201).json({message:"User created sucessfully!"});
             }
