@@ -25,7 +25,7 @@ exports.up = function(knex) {
         tbl.string("description", 255)
           .notNullable();
         
-        tbl.string("gift_url", 255)
+        tbl.string("gift_url", 500)
           .notNullable();
         
         tbl.boolean("purchased")
