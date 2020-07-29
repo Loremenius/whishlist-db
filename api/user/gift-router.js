@@ -7,17 +7,22 @@ const userDb = require('./user-model')
 const AuthorizeAction = require('../middleware/AuthorizeAction');
 const VerifyGift = require('../middleware/VerifyGift');
 
-
+// This route is used to update the user's information
 router.put('/:id', AuthorizeAction, (req,res)=>{
+    // changes the username in the body request to all lowercase characters.
     req.body.username = req.body.username.toLowerCase();
+    // hashes the password in the body request.
     req.body.password = bcrypt.hashSync(req.body.password,8);
+    // sends request body to database to update user.
     userDb.editUser(req.body)
+        // if update is successful: send response with message saying the update was a success.
         .then(data=>{
-            console.log("update success",data)
-            if(data){
-                res.status(201).json({message:"User updated sucessfully!"});
+            console.log( "update success" , data );
+            if( data ){
+                res.status(201).json( { message:"User updated sucessfully!" } );
             }
         })
+        // if there is an error log error in console and send response back with error and errorMessage.
         .catch(error=>{
             console.log(error);
             res.status(500).json({
