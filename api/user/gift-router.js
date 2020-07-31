@@ -1,22 +1,23 @@
-const express = require('express');
+const express = require( 'express' );
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const bcrypt = require( 'bcryptjs' );
 
-const userDb = require('./user-model')
+const userDb = require( './user-model' )
 
-const AuthorizeAction = require('../middleware/AuthorizeAction');
-const VerifyGift = require('../middleware/VerifyGift');
+const AuthorizeAction = require( '../middleware/AuthorizeAction' );
+const VerifyGift = require( '../middleware/VerifyGift' );
 
 // This route is used to update the user's information
-router.put('/:id', AuthorizeAction, (req,res)=>{
+// uses AuthorizeAction middleware to verify the user can make changes to the user with id in the request route.
+router.put('/:id', AuthorizeAction, ( req, res ) => {
     // changes the username in the body request to all lowercase characters.
     req.body.username = req.body.username.toLowerCase();
     // hashes the password in the body request.
-    req.body.password = bcrypt.hashSync(req.body.password,8);
+    req.body.password = bcrypt.hashSync( req.body.password, 8 );
     // sends request body to database to update user.
-    userDb.editUser(req.body)
+    userDb.editUser( req.body )
         // if update is successful: send response with message saying the update was a success.
-        .then(data=>{
+        .then( data=>{
             console.log( "update success" , data );
             if( data ){
                 res.status(201).json( { message:"User updated sucessfully!" } );
@@ -31,18 +32,25 @@ router.put('/:id', AuthorizeAction, (req,res)=>{
             });
         })
 });
-
-router.get('/:name', (req,res)=>{
-    userDb.findByName(req.params.name.toLowerCase())
+// This route is used to retrieve user id, first, and last name with a given username.
+router.get( '/:username' , ( req, res ) => {
+    // uses SQL query to retrieve data with given username
+    userDb.findByName(req.params.username.toLowerCase())
+        // retrieval of data was successful
         .then(data=>{
+            // if data is NOT undefined
             if(data){
+                // return response with data: consists of object with id, firstname, lastname
                 res.status(200).json(data);
+            // if the data is undefined
             }else{
-                res.status(404).json({message:"No user by that username"})
+                // return response with message saying there is no user with that username.
+                res.status(404).json( { message:"No user by that username" } );
             }
         })
-        .catch(error=>{
-            console.log(error);
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
+        .catch( error => {
+            console.log( error );
             res.status(500).json({
                 error:error,
                 errorMessage: 'error finding user'
