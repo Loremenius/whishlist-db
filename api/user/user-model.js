@@ -16,7 +16,7 @@ module.exports = {
 
 function findByName(username){
     return db('user')
-        .select('*')
+        .select('id', 'firstname', 'lastname')
         .where('username', username)
         .first()
 }
