@@ -57,12 +57,15 @@ router.get( '/:username' , ( req, res ) => {
             });
         })
 });
-
+// This route is used to retrive an array of all the gifts of a user's wishlist.
 router.get('/:id/list',(req,res)=>{
+    // uses SQL query to retrieve data with given user id.
     userDb.getUserList(req.params.id)
+        // if there the data variable is an array: respond with this array.
         .then(data=>{
             res.status(200).json(data)
         })
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
         .catch(error=>{
             res.status(500).json({
                 error:error,
