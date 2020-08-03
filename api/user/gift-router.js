@@ -73,8 +73,10 @@ router.get('/:id/list',(req,res)=>{
             });
         })
 });
-
+// This route is used to retrieve a gift
+// uses VerifyGift Middleware to check for gift and retrive gift from database
 router.get('/list/:gift_id', VerifyGift, (req,res)=>{
+    // sends response with found gift from VerifyGift Middleware
     res.status(200).json(req.gift)
 });
 
