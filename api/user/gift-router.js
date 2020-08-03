@@ -58,12 +58,12 @@ router.get( '/:username' , ( req, res ) => {
         })
 });
 // This route is used to retrive an array of all the gifts of a user's wishlist.
-router.get('/:id/list',(req,res)=>{
+router.get('/:id/list',( req, res ) => {
     // uses SQL query to retrieve data with given user id.
-    userDb.getUserList(req.params.id)
+    userDb.getUserList( req.params.id )
         // if there the data variable is an array: respond with this array.
         .then(data=>{
-            res.status(200).json(data)
+            res.status(200).json( data )
         })
         // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
         .catch(error=>{
@@ -79,16 +79,20 @@ router.get('/list/:gift_id', VerifyGift, (req,res)=>{
     // sends response with found gift from VerifyGift Middleware
     res.status(200).json(req.gift)
 });
-
-router.post('/:id/list', AuthorizeAction, (req,res)=>{
+// This route is used to add a gift to a user's wishlist.
+// uses AuthorizeAction middleware to verify the user can make changes to the user with id in the request route.
+router.post('/:id/list', AuthorizeAction, ( req, res ) => {
+    // uses SQL query to add new gift with given request body.
     userDb.addGift(req.body)
+        // if it was successful respond with message "Gift created successfully" and logs success in console.
         .then(data=>{
-            console.log("insert success",data)
-            if(data){
-                res.status(201).json({message:"Gift created sucessfully!"});
+            console.log( "insert success", data )
+            if( data ){
+                res.status(201).json( { message:"Gift created sucessfully!" } );
             }
         })
         .catch(error=>{
+            // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
             console.log(error);
             res.status(500).json({
                 error:error,
