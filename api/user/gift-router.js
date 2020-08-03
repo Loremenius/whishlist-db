@@ -91,8 +91,8 @@ router.post('/:id/list', AuthorizeAction, ( req, res ) => {
                 res.status(201).json( { message:"Gift created sucessfully!" } );
             }
         })
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
         .catch(error=>{
-            // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
             console.log(error);
             res.status(500).json({
                 error:error,
@@ -100,17 +100,27 @@ router.post('/:id/list', AuthorizeAction, ( req, res ) => {
             });
         })
 });
-
+// This route is used to update a gift in a user's wishlist
+// uses AuthorizeAction middleware to verify the user can make changes to the user with id in the request route.
+// uses VerifyGift Middleware to check for gift in the database
 router.put('/:id/list/:gift_id',AuthorizeAction,  VerifyGift, (req,res)=>{
+    // uses SQL query to update gift with given data from request body.
     userDb.updateGift(req.body, req.params.gift_id)
+        // if SQL query is a success
         .then(data=>{
+            // if the entrees updated is greater than 0
             if(data > 0){
-                res.status(200).json({message:'Gift updated'})
+                // send response with message 'Gift updated'
+                res.status(200).json( { message:'Gift updated' } )
+            // if the amount of updated entrees is 0
             }else{
-                res.status(404).json({message:`No gift found with id: ${req.params.gift_id}`})
+                // respond with error message no entry found with id
+                res.status(404).json( { message:`No gift found with id: ${req.params.gift_id}` } )
             }
         })
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
         .catch(error=>{
+            console.log( error );
             res.status(500).json({
                 error:error,
                 message:`error updating gift with id:${req.params.gift_id}`
@@ -121,10 +131,10 @@ router.put('/:id/list/:gift_id',AuthorizeAction,  VerifyGift, (req,res)=>{
 router.put('/:id/list/:gift_id/purchased',VerifyGift, (req,res)=>{
     userDb.markPurchased(req.params.gift_id)
         .then(data=>{
-            if(data > 0){
-                res.status(200).json({message:'Gift updated'})
+            if( data > 0 ){
+                res.status(200).json( { message:'Gift updated' } )
             }else{
-                res.status(404).json({message:`No gift found with id: ${req.params.gift_id}`})
+                res.status(404).json( { message:`No gift found with id: ${req.params.gift_id}` } )
             }
         })
         .catch(error=>{
