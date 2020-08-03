@@ -153,17 +153,28 @@ router.put('/:id/list/:gift_id/purchased', VerifyGift, ( req, res ) => {
             });
         })
 });
-
-router.delete('/:id/list/:gift_id',AuthorizeAction, VerifyGift, (req,res)=>{
+// this route is used to delete a gift from a user's wishlist
+// uses AuthorizeAction middleware to verify the user can make changes to the user with id in the request route.
+// uses VerifyGift Middleware to check for gift in the database
+router.delete('/:id/list/:gift_id', AuthorizeAction, VerifyGift, ( req, res ) => {
+    // uses SQL query to update gift's purchased boolean to true.
     userDb.deleteGift(req.params.gift_id)
+        // if SQL query is a success
         .then( data => {
+            // if there is more than 0 updated entries 
             if( data > 0 ){
-                res.status(200).json({message:'Gift deleted'})
+                // respond with message saying gift is deleted
+                res.status(200).json( { message:'Gift deleted' } )
+
+            // if there are 0 updated entries 
             } else {
-                res.status(404).json({message:`No gift found with id: ${req.params.gift_id}`})
+                // respond with error message of no gift with found id.
+                res.status(404).json( { message:`No gift found with id: ${req.params.gift_id}` } )
             }
         })
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
         .catch( error => {
+            console.log( error ); 
             res.status(500).json({
                 error:error,
                 message:`error deleting gift with id:${req.params.gift_id}`
