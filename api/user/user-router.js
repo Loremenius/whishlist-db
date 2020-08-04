@@ -40,8 +40,8 @@ router.post('/login', ValidateLogin, ( req, res ) => {
             }
         })
         // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
-        .catch(error=>{
-            console.log(error);
+        .catch( error => {
+            console.log( error );
             res.status(500).json({
                 error:error,
                 message:'error logging in user'
@@ -59,7 +59,7 @@ router.post('/register', ValidateRegister, FindUserByUsername, ( req, res ) => {
     // uses SQL query to add user to the database. 
     userDb.createUser( req.body )
         // if the SQL query is successful
-        .then(data=>{
+        .then( data => {
             // if there is data returned from the query
             if( data ){
                 // respond with message saying user creation was successful
@@ -68,32 +68,44 @@ router.post('/register', ValidateRegister, FindUserByUsername, ( req, res ) => {
         })
         // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
         .catch( error => {
-            console.log(error);
+            console.log( error );
             res.status(500).json({
                 error:error,
                 errorMessage: 'error creating user'
             });
         })
 });
-
-router.get('/families', (req,res)=>{
+// This route is used to get all users organized by lastname.
+router.get('/families', ( req, res ) => {
+    // uses SQL query to retrieve all users in the database. 
     userDb.getUsers()
+        // if the SQL query is successful
         .then(data=>{
+            // creates an empty object.
             const families = {};
-            data.forEach((user)=>{
-                if(user.lastname in families === false){
+            // loops through all users retrieved 
+            data.forEach( ( user ) => {
+                // if the user's last name is not a key in the families object
+                if( user.lastname in families === false ){
+                    // adds lastname as a key. Under the key adds an object
+                    // object includes name ( string of the lastname of the user ) and members ( array of users with this lastname )
                     families[user.lastname] = {
                         name:user.lastname,
                         members:[ user ]
                     }
-                }else{
+                // if the user's last name is already a key in the families object
+                } else {
+                    // add user to the members array to the respective key in families object.
                     families[user.lastname].members = [ ...families[user.lastname].members,user ] 
                 }
             })
-            res.status(200).json(families)
+            // after looping through data and adding users to families object
+            // respond with families object
+            res.status(200).json( families );
         })
-        .catch(error=>{
-            console.log(error);
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
+        .catch( error => {
+            console.log( error );
             res.status(500).json({
                 error:error,
                 errorMessage:'Error getting list of users'
