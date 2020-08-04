@@ -141,19 +141,21 @@ router.get('/families/:name', ( req, res ) => {
 });
 
 
-
+// function to create a token for successful login. takes in user object.
 function signToken(user) {
+    // object with user's username and id
     const payload = {
       username: user.username,
       id: user.id, 
     };
-  
+    // string that uses environment variable if availible or uses 'Santa's Little Helper'
     const secret = process.env.JWT_SECRET || "Santa's Little Helper";
-  
+    // object for options of the token. 
+    // sets expiration of the token to 1 hour.
     const options = {
       expiresIn: "1h",
     };
-  
+    // uses jsonwebtoken.sign to create token with given variables and returns token.
     return jwt.sign(payload, secret, options); 
   };
 
