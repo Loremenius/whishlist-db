@@ -112,20 +112,27 @@ router.get('/families', ( req, res ) => {
             })
         })
 });
-
-router.get('/families/:name', (req,res)=>{
-    userDb.getFamilyUsers(req.params.name)
+// this route retrieves all users under a specific lastname.
+router.get('/families/:name', ( req, res ) => {
+    // uses SQL query to retrieve all users with lastname in request parameters
+    userDb.getFamilyUsers( req.params.name )
+        // if the SQL query is successful 
         .then(data=>{
+            // if the length of the array from the SQL query is 0
             if (data.length === 0){
+                // respond with error message saying there are no users with lastname
                 res.status(404).json({
                     message:`No users with lastname: ${req.params.name}`
                 });
-            }else{
+            // if there are users in the array from query.
+            } else {
+                // respond with data from SQL query
                 res.status(200).json(data)
             }
         })
-        .catch(error=>{
-            console.log(error);
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
+        .catch( error => {
+            console.log( error );
             res.status(500).json({
                 error:error,
                 errorMessage:'Error getting list of users'
