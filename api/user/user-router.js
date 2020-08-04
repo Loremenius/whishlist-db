@@ -48,17 +48,26 @@ router.post('/login', ValidateLogin, ( req, res ) => {
             });
         })
 })
-
-router.post('/register', ValidateRegister, FindUserByUsername, (req,res)=>{
+// This route is used to register a new user to the website.
+// uses ValidateRegister middleware to verify request body has correct information for registering.
+// uses FindUserByUsername to ensure the new user request is using a unique username.
+router.post('/register', ValidateRegister, FindUserByUsername, ( req, res ) => {
+    // takes username and makes all characters lowercase
     req.body.username = req.body.username.toLowerCase();
-    req.body.password = bcrypt.hashSync(req.body.password,8);
-    userDb.createUser(req.body)
+    // takes password and hashes it to be stored in database
+    req.body.password = bcrypt.hashSync( req.body.password, 8 );
+    // uses SQL query to add user to the database. 
+    userDb.createUser( req.body )
+        // if the SQL query is successful
         .then(data=>{
-            if(data){
-                res.status(201).json({message:"User created sucessfully!"});
+            // if there is data returned from the query
+            if( data ){
+                // respond with message saying user creation was successful
+                res.status(201).json( { message:"User created sucessfully!" } );
             }
         })
-        .catch(error=>{
+        // if there is an error retrieving from database: log error in console and send response back with error and errorMessage.
+        .catch( error => {
             console.log(error);
             res.status(500).json({
                 error:error,
