@@ -16,9 +16,10 @@ router.post('/login', ValidateLogin, ( req, res ) => {
     userDb.findByName(req.body.username)
         // if the SQL query is successful
         .then( data => {
+            console.log(data);
             // if there is data and the password in request body is the same to the password in the database.
             // the password given is not hashed but the one in the database is. 
-            // uses bcrypt.compareSync function to compare the unhashed password and hashed password ( returns boolean )
+            // uses bcrypt.compareSync function to compare the unhashed passwor"d and hashed password ( returns boolean )
             if( data && bcrypt.compareSync(req.body.password, data.password) ){
                 // uses signToken function to create a token. ( takes in data from SQL query )
                 const token = signToken(data);
@@ -80,7 +81,7 @@ router.get('/families', ( req, res ) => {
     // uses SQL query to retrieve all users in the database. 
     userDb.getUsers()
         // if the SQL query is successful
-        .then(data=>{
+        .then( data => {
             // creates an empty object.
             const families = {};
             // loops through all users retrieved 
