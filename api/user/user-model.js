@@ -30,7 +30,7 @@ function editUser(user){
 }
 
 function getUserList(user_id){
-    return db('gift').select('*').where('user_id', user_id)
+    return db('gift').select('*').where('user_id', user_id).orderBy('id');
 }
 
 function getGift(gift_id){
