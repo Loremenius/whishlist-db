@@ -9,7 +9,7 @@ const VerifyGift = require( '../middleware/VerifyGift' );
 
 // This route is used to update the user's information
 // uses AuthorizeAction middleware to verify the user can make changes to the user with id in the request route.
-router.put('/:id',  ( req, res ) => {
+router.put('/:id', AuthorizeAction, ( req, res ) => {
     // changes the username in the body request to all lowercase characters.
     req.body.username = req.body.username.toLowerCase();
     // hashes the password in the body request.
