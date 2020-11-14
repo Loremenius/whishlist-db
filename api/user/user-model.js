@@ -11,7 +11,8 @@ module.exports = {
     deleteGift,
     markPurchased,
     getUsers,
-    getFamilyUsers
+    getFamilyUsers,
+    removeUser
 };
 
 function findByName(username){
@@ -27,6 +28,10 @@ function createUser(user){
 
 function editUser(user){
     return db('user').update({...user}).where('id', user.id)
+}
+
+function removeUser(username){
+    return db('user').where('username', username).delete()
 }
 
 function getUserList(user_id){
