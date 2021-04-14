@@ -17,7 +17,11 @@ server.use(cors());
 server.use("/api/user", user);
 // user routes uses '/api/user/wishlist' as the begining to all of the routes under gift-router.js
 // all routes using '/api/user/wishlist' also use the ValidateToken Middleware
+<<<<<<< HEAD
 server.use('/api/user/wishlist', ValidateToken, gift)
+=======
+server.use('/api/user/wishlist', gift)
+>>>>>>> 8188b282cd44da83be62d901ff5fa2a19a0d2521
 
 
 module.exports = server;
