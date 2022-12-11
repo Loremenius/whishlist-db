@@ -82,13 +82,6 @@ exports.seed = function(knex) {
               lastname: 'Ramirez'
             },
             {
-              id: '21',
-              username: 'wil',
-              password: '$2a$08$QgIvZ7nJbbuuh93H6P4tpuuBkHFGPjQwEEik77KgA2j.jyC3mLUCi',
-              firstname: 'Wil',
-              lastname: 'Ramirez'
-            },
-            {
               id: '20',
               username: 'dlcasias',
               password: '$2a$08$t2nwc7Tp1jBquCM6xyjn3uWJJh6P3JmYnPMqRPCJG1Pu0KkIx/HbK',
