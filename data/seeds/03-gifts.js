@@ -27,7 +27,6 @@ exports.seed = function(knex) {
     {"name":"Legendary - Secret Wars Volume 2 Expansion","description":"","gift_url":"https://www.amazon.com/Legendary-Marvel-Secret-Deck-BuildingCard/dp/B015IWS61Y","purchased":false,"user_id":1},
     {"name":"Log Horizon Vol. 1-11 (light novel)","description":"","gift_url":"https://www.amazon.com/Log-Horizon-Vol-light-novel-ebook/dp/B083SC2CNV/ref=mp_s_a_1_3?dchild=1&keywords=log+horizon+light+novel+set&qid=1594240048&sprefix=log+horizon+&sr=8-3","purchased":false,"user_id":6},
     {"name":"Dungeon and Dragons Stickers from Redbubble","description":"Just any that have cool designs or are ironic","gift_url":"Example:\nhttps://www.redbubble.com/i/sticker/Guess-I-ll-Die-by-Matte-Bat/26743673.EJUG5","purchased":false,"user_id":28},
-    {"name":"Mandalorian t shirt","description":"Adult size Small","gift_url":"","purchased":false,"user_id":21},
     {"name":"Sharp vacuum cordless handheld wand","description":"","gift_url":"HSN","purchased":false,"user_id":5},
     {"name":"Origami 3 drawer rolling & iron station#698918 Want ONLY palm leaf design pls HSN","description":"","gift_url":"","purchased":false,"user_id":5},
     {"name":"Graphic Design print","description":"","gift_url":"https://popchart.co/collections/design/products/a-stylistic-survey-of-graphic-design","purchased":true,"user_id":31},
