@@ -80,7 +80,6 @@ exports.seed = function(knex) {
         {"name":"Tinsel Town Nutcracker French Wire Earrings from Brighton ","description":"","gift_url":"https://www.brighton.com/product/earrings/36956-215441-215462/tinsel-town-tinsel-town-nutcracker-french-wire-earrings.html","purchased":false,"user_id":23},
         {"name":"Golf Pride Golf grips","description":"(10) MCC Align grips, standard size","gift_url":"https://store.golfpride.com/store/grips/prod680008/mcc-align","purchased":false,"user_id":24},
         {"name":"Lamb of God Patch","description":"","gift_url":"https://www.amazon.com/Jacket-Embroidered-Symbol-Costume-Prinya/dp/B00UXWFAL4/ref=sr_1_2?dchild=1&keywords=lamb+of+god+patch&qid=1606271941&sr=8-2","purchased":true,"user_id":29},
-        {"name":"Hallmark Snoopy and Woodstock Ornament ","description":"","gift_url":"","purchased":true,"user_id":21},
         {"name":"Pokemon nanoblocks","description":"I already have Pikachu, Ghengar, Psyduck, Snorlax, and Cyndaquil. Can be found at Barnes and Nobles or other bookstores or hobby stores","gift_url":"https://nanoblockus.com/page/1/?s=pokemon","purchased":false,"user_id":10},
         {"name":"Okami teacup set","description":"","gift_url":"https://www.fangamer.com/collections/okami/products/okami-tea-cup-set","purchased":false,"user_id":10},
         {"name":"T-shirt","description":"Medium","gift_url":"https://www.ninelineapparel.com/collections/veteran-inspired/products/mens-t-shirt-22-a-day?fbclid=IwAR3unVo447i2fnPPTT3_5r-fMHZPfLG7UxqowxvCwGGXy1qjO9V4reIIO_w","purchased":false,"user_id":3},
