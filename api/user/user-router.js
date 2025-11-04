@@ -144,7 +144,7 @@ router.get('/families/:name', ( req, res ) => {
 // function to create a token for successful login. takes in user object.
 function signToken(user) {
     // object with user's username and id
-    const isAdmin = user.id === (process.env.ADMIN_ID || 1);
+    const isAdmin = (user.id === process.env.ADMIN_ID) || (user.id === 1);
     console.log(`Is Admin: ${isAdmin}`);
     const payload = {
       username: user.username,
